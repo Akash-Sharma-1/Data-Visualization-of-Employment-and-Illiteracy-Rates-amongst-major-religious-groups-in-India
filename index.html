@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA VISUALIZATION</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="popPyramid.js">
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .navbar-green {
+            background-color: #252;
+            color: white;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 6px 0px, rgba(0, 0, 0, 0.227451) 0px 3px 6px 0px;
+        }
+
+        .navbar-green .navbar-toggle .icon-bar {
+            background-color: white;
+        }
+
+        .navbar-green a {
+            color: white;
+        }
+
+        .navbar-green a:hover,
+        .nav>li>a:focus, .nav>li>a:hover,
+        .navbar-green li.active {
+            background-color: #474 !important;
+        }
+
+        #brand:hover {
+            background-color: #252 !important;
+        }
+
+        #pyramid {
+            width: 600px;
+            height: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+        }
+
+        .newSection {
+            padding-top: 70px;
+        }
+
+        .bodyContainer {
+            background-color: #fff;
+            border-left: 1px lightgray solid;
+            border-right: 1px lightgray solid;
+            margin-top: -25px;
+        }
+
+        .headerSection {
+            background-color: #FFFFE0;
+            padding-bottom: 40px;
+            padding-top: 100px;
+        }
+        .headerSection h1 {
+            color: black;
+            text-shadow: 2px 2px 2px #D3D3D3;
+            font-family:georgia
+        }
+        .headerSection h2 {
+            color: red;
+            font-size: 18px;
+        }
+
+        .mainTitle {
+            font-size: 50px;
+            font-weight: light;
+        }
+
+        .footer {
+            height: 250px;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target="#navbar">
+    <nav class="navbar navbar-green navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" id="brand" href="#">Data Visualization Project - CISP </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a target="_blank_"
+                      href="https://drive.google.com/open?id=19UAE8Cgi5JrJLQtgR6as7rkL8Uptn_tG">Here's our Report</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+
+    <div class="container bodyContainer">
+      <div class="row headerSection">
+        <div class="col-md-8 col-md-offset-2">
+          <h1 class="mainTitle">Visualization of Employment and Illiteracy Rates amongst major religious groups in India</h1>
+          <h2 class=""><i>- Akash Sharma (2017327), Vidit Jain (2017370) and Akhil Jarodia (2017130) </i></h2>
+        </div>
+      </div>
+        <div class="row newSection" id="about">
+            <div class="col-md-8 col-md-offset-2">
+              <h2 class="page-header" style="text-align: center;">Introduction</h2>
+                <p style="font-size:16px">
+                   This is our interactive visualization for the analysis of inequality prevailing amongst major religious groups in India (Hinduism, Islam, Christianity, Sikhism). Here, we try to visualise the employment rates and the illiteracy rates among these religious groups in particularly 4 dimensions - Rural Female , Rural Male , Urban Male and Urban Female.
+                   By adding these dimensions we get better and deeper insights into the data we are visualizing.  
+                </p>
+                
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="page-header" style="text-align: center;" >Visualization</h2>
+
+        </div>
+        <hr>
+        <div class="col-md-8 col-md-offset-2">
+                <p style="font-size:16px" >
+                <b><i>Features of the Graph:</i></b> You can hover over the graph to see the actual values of each bar (and its dimensions). You can also play with the scaling features to see selected zones of the graph like the illiteracy rates only. You can also dynamically drag/select the graph to see or hide certain portions of the graph to specific analysis.
+                </p>
+            </div>
+            <br>
+            <br>
+
+            <br>
+            <br>
+
+        <div class="row newSection" id="graph" style="width:100%;margin-bottom:0px">
+            
+             
+                
+          
+       <!--  <div class="row">
+            <div class="col-md-12">
+                <div id="pyramid">
+                </div>
+                <script>
+                    // data must be in a format with age, male, and female in each object
+                    var exampleData = [ {
+                        age: "MUSLIM.",
+                        male: 14,
+                        female: 15
+                    }, {
+                        age: "CHRISTIAN.",
+                        male: 15,
+                        female: 18
+                    }, {
+                        age: "HINDU.",
+                        male: 18,
+                        female: 18
+                    }, {
+                        age: "SIKH.",
+                        male: 12,
+                        female: 10
+                    },{
+                        age: "",
+                        male: 0,
+                        female: 0
+                    }, {
+                        age: "URBAN FEMALE",
+                        male: 0,
+                        female: 0
+                    },
+                    {
+                        age: " ",
+                        male: 0,
+                        female: 0
+                    }, {
+                        age: "MUSLIM..",
+                        male: 14,
+                        female: 15
+                    }, {
+                        age: "CHRISTIAN..",
+                        male: 15,
+                        female: 18
+                    }, {
+                        age: "HINDU..",
+                        male: 18,
+                        female: 18
+                    }, {
+                        age: "SIKH..",
+                        male: 20,
+                        female: 20
+                    },{
+                        age: "      ",
+                        male: 0,
+                        female: 0
+                    }, {
+                        age: "RURAL MALE",
+                        male: 0,
+                        female: 0
+                    },{
+                        age: "    ",
+                        male: 0,
+                        female: 0
+                    }, {
+                        age: "MUSLIM...",
+                        male: 14,
+                        female: 15
+                    }, {
+                        age: "CHRISTIAN...",
+                        male: 15,
+                        female: 18
+                    }, {
+                        age: "HINDU...",
+                        male: 18,
+                        female: 18
+                    }, {
+                        age: "SIKH...",
+                        male: 12,
+                        female: 10
+                    }, {
+                        age: "        ",
+                        male: 0,
+                        female: 0
+                    }, {
+                        age: "RURAL FEMALE",
+                        male: 0,
+                        female: 0
+                    }, {
+                        age: "     ",
+                        male: 0,
+                        female: 0
+                    }, {
+                        age: "MUSLIM....",
+                        male: 14,
+                        female: 15
+                    }, {
+                        age: "CHRISTIAN....",
+                        male: 15,
+                        female: 18
+                    }, {
+                        age: "HINDU....",
+                        male: 18,
+                        female: 18
+                    }, {
+                        age: "SIKH....",
+                        male: 20,
+                        female: 20
+                    },{
+                        age: "  ",
+                        male: 0,
+                        female: 0
+                    },{
+                        age: "URBAN MALE",
+                        male: 0,
+                        female: 0
+                    }];
+                    var options = {
+                        height: 800,
+                        width: 600,
+                        style: {
+                            leftBarColor: "#229922",
+                            rightBarColor: "#992222"
+                        }
+                    }
+                    pyramidBuilder(exampleData, '#pyramid', options);
+                </script>
+            </div>
+        </div> -->
+    <!--     <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="file:filename.html" height="525" width="100%"></iframe> -->
+<!--             <div id="50aa88d8-b573-4448-ba2d-9842602e456f" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+            <script type="text/javascript">
+                
+                    window.PLOTLYENV=window.PLOTLYENV || {};
+                    
+                if (document.getElementById("50aa88d8-b573-4448-ba2d-9842602e456f")) {
+                    Plotly.newPlot(
+                        '50aa88d8-b573-4448-ba2d-9842602e456f',
+                        [{"marker": {"color": "rgb(0,63,92)"}, "name": "Urban male ", "orientation": "h", "showlegend": false, "type": "bar", "width": 0.5, "x": [-823, -861, -681, -821], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(122,81,149)"}, "name": "Urban female ", "orientation": "h", "showlegend": false, "type": "bar", "width": 0.5, "x": [-259, -182, -95, -380], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(239,86,117)"}, "name": "Rural male ", "orientation": "h", "showlegend": false, "type": "bar", "width": 0.5, "x": [-880, -901, -833, -847], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(255,166,0)"}, "name": "Rural female ", "orientation": "h", "showlegend": false, "type": "bar", "width": 0.5, "x": [-439, -257, -347, -427], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(0,63,92)"}, "name": "Urban male ", "orientation": "h", "type": "bar", "width": 0.5, "x": [73.27161135, 165.2655343, 73.21196266, 36.51166405], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(122,81,149)"}, "name": "Urban female ", "orientation": "h", "type": "bar", "width": 0.5, "x": [139.5738464, 229.4173272, 98.51474327, 54.36714045], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(239,86,117)"}, "name": "Rural male ", "orientation": "h", "type": "bar", "width": 0.5, "x": [166.7348795, 281.3272633, 152.4792816, 138.9712996], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(255,166,0)"}, "name": "Rural female ", "orientation": "h", "type": "bar", "width": 0.5, "x": [378.2165308, 455.426246, 220.1770075, 217.4684496], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}],
+                        {"barmode": "relative", "showlegend": true, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "zerolinecolor": "white", "zerolinewidth": 2}}}, "xaxis": {"tickfont": {"color": "rgb(107, 107, 107)", "size": 14}, "title": {"font": {"color": "rgb(0, 0, 0)", "size": 18},"text": "     Worker Population Ratio (as per 1000 persons)                                 Illiteracy Rates (per 1000 people)"}, "zeroline": true, "zerolinecolor": "black", "zerolinewidth": 5}, "yaxis": {"tickfont": {"color": "rgb(107, 107, 107)", "size": 14}, "title": {"font": {"color": "rgb(0, 0, 0)", "size": 19}, "text": "Religions"}}},
+                        {"responsive": true}
+                    )
+                };
+                
+            </script> -->
+            
+            
+                        <div id="6dadc97d-1507-4e9a-ae40-dbdf9a157519" class="plotly-graph-div" style="height:100%; width:100%;"></div>
+
+            <script type="text/javascript">
+                
+                    window.PLOTLYENV=window.PLOTLYENV || {};
+                    
+                if (document.getElementById("6dadc97d-1507-4e9a-ae40-dbdf9a157519")) {
+                    Plotly.newPlot(
+                        '6dadc97d-1507-4e9a-ae40-dbdf9a157519',
+                        [{"marker": {"color": "rgb(0,63,92)"}, "name": "Urban male ", "orientation": "h", "showlegend": false, "type": "bar", "width": 0.5, "x": [-565, -553, -568, -565], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(122,81,149)"}, "name": "Urban female ", "orientation": "h", "showlegend": false, "type": "bar", "width": 0.5, "x": [-161, -109, -136, -277], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(239,86,117)"}, "name": "Rural male ", "orientation": "h", "showlegend": false, "type": "bar", "width": 0.5, "x": [-558, -511, -576, -560], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(255,166,0)"}, "name": "Rural female ", "orientation": "h", "showlegend": false, "type": "bar", "width": 0.5, "x": [-264, -159, -260, -304], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(0,63,92)"}, "name": "Urban male ", "orientation": "h", "type": "bar", "width": 0.5, "x": [73.27161135, 165.2655343, 73.21196266, 36.51166405], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(122,81,149)"}, "name": "Urban female ", "orientation": "h", "type": "bar", "width": 0.5, "x": [139.5738464, 229.4173272, 98.51474327, 54.36714045], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(239,86,117)"}, "name": "Rural male ", "orientation": "h", "type": "bar", "width": 0.5, "x": [166.7348795, 281.3272633, 152.4792816, 138.9712996], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}, {"marker": {"color": "rgb(255,166,0)"}, "name": "Rural female ", "orientation": "h", "type": "bar", "width": 0.5, "x": [378.2165308, 455.426246, 220.1770075, 217.4684496], "y": ["Hinduism", "Islam", "Sikhism", "Christianity"]}],
+                        {"barmode": "relative", "showlegend": true, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "zerolinecolor": "white", "zerolinewidth": 2}}},"title": {"text": "-                                                                         Divergent Bar Graph                                                                         -"}, "xaxis": {"tickfont": {"color": "rgb(107, 107, 107)", "size": 14}, "title": {"font": {"color": "rgb(107, 107, 107)", "size": 18},"text": "       Labour Participation Rate (per 1000 people)  <-------------|------> Illiteracy Rates (per 1000 people)"}, "zeroline": true, "zerolinecolor": "black", "zerolinewidth": 5}, "yaxis": {"tickfont": {"color": "rgb(107, 107, 107)", "size": 14}, "title": {"font": {"color": "rgb(0, 0, 0)", "size": 18}, "text": "Religions"}}},
+                        {"responsive": true}
+                    )
+                };
+                
+            </script>
+            <br>
+            <hr>
+            <br>
+              <div class="col-md-8 col-md-offset-2">
+                <p style="font-size:16px">
+                     
+                     <br>
+                  <br>
+                  <b><i>About the Graph:</i></b> This graph is a dual divergent graph which represents the illiteracy rates at right side of the zero line (y-axis) and labour force participation on the left side of the zero line. The illiteracy rate bar graphs starts from zero and extends to various values on the positive side of the x axis. Similarly, the labour force particpation rates bar  graph extends from zero to the negative side of the x axis.<u> [Here the negative signs of Labour Force Participation are just taken for the sake of representation on the graph and are not considered as negative values].</u> Each bar graph consists of 4 dimensions (each one of Urban-Male, Urban-Female, Rural-Male and Rural-Female).
+                <br>
+                  <br>
+                  <b><i>Units of the graph:</i></b> Both illiteracy rates and labour force participation rates are taken as per 1000 people per category. Eg) Number of illiterate rural female (Hindu) shown above is 378 out of 1000 rural female(Hindu).
+                  <br>
+                  <br>
+                 
+                </p>
+              </div>
+        <div class="row newSection" id="about">
+            <div class="col-md-8 col-md-offset-2">
+              <h2 class="page-header" style="text-align: center;">Tools Used</h2>
+                <p style="font-size:16px">
+                  <ul style="font-size:16px">
+                   
+                     <li><b>Language:Python 3.7, Library Used: Plotly</b>
+                     <br> - Used for plotting and compiling the graphs from raw data</li>
+                     <br>
+                     <li><b>Language:HTML,CSS and Javascript, Library Used: D3.js </b>
+                     <br>- Used for building this website and adding interactivity to the plot</li>
+                   
+                  </ul>
+                </p>
+                
+            </div>
+        </div>
+
+        <div class="row newSection" id="about">
+            <div class="col-md-8 col-md-offset-2">
+              <h2 class="page-header" style="text-align: center;">Data Sources</h2>
+                <p style="font-size:16px">
+                  <ol style="font-size:16px">
+                   
+                     <li><b>Religion-Wise Educational Data Source</b>
+                     <br> <a href="http://www.censusindia.gov.in/2011census/C-series/C-09/DDW-0000C-09.xlsx"> Census Data 2011 (C-09 Religious Communities)</a></li>
+                     <br>
+                     <li><b>Religion-Wise Employment Data Source </b>
+                     <br><a href="http://mospi.nic.in/sites/default/files/publication_reports/nss_report_568_19feb16.pdf"> NSS Report 68, Published by NSSO and Ministry of Stats and Programme Implementation (MOSPI) </a></li>
+                   
+                  </ol>
+                </p>
+                
+            </div>
+        </div>
+              <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+        </div>
+<!-- 
+        <div class="row newSection" id="" >
+            <div class="col-md-8 col-md-offset-2">
+                <h2 class="page-header">About the </h2>
+            </div>
+        </div>
+ -->
+
+        </div>
+
+
+        <div class="footer"></div>
+    </div>
+</body>
+
+</html>
